@@ -1,6 +1,12 @@
-﻿namespace SmartPantry.Api.Models
+﻿namespace SmartPantry.Models
 {
     public class EcoPoints
     {
+        public int Id { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        public int TotalPoints { get; set; }
     }
 }

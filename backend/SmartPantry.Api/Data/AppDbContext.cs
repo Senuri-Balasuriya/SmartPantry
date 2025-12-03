@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartPantry.Api.Models;
+using SmartPantry.Models;
 
 namespace SmartPantry.API.Data
 {
