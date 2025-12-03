@@ -1,6 +1,8 @@
+
 ﻿
 
 namespace SmartPantry.Models
+
 {
     public class EcoPoints
     {
