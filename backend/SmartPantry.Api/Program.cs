@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SmartPantry.Api.Mappings;
 using SmartPantry.Api.Repositories;
 using SmartPantry.Api.Repositories.Interfaces;
 using SmartPantry.Api.Services;
 using SmartPantry.Api.Services.Interfaces;
-using SmartPantry.Api.Data;
 using SmartPantry.API.Data;
 using SmartPantry.API.Repositories;
 using SmartPantry.API.Services;
-using System.Text;
-using Microsoft.OpenApi.Models;
+using SmartPantry.Services;
+using SmartPantry.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
