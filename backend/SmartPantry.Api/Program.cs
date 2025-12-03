@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SmartPantry.Api.Mappings;
 using SmartPantry.Api.Repositories;
 using SmartPantry.Api.Repositories.Interfaces;
 using SmartPantry.Api.Services;
 using SmartPantry.Api.Services.Interfaces;
 using SmartPantry.API.Data;
 using SmartPantry.API.Repositories;
-using SmartPantry.API.Services;
+using SmartPantry.Repositories;
+using SmartPantry.Repositories.Interfaces;
 using SmartPantry.Services;
 using SmartPantry.Services.Interfaces;
 
@@ -22,7 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 // Register AutoMapper
-builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Register Repositories
 builder.Services.AddScoped<IConsumptionRepository, ConsumptionRepository>();
