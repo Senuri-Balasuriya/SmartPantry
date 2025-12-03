@@ -1,13 +1,18 @@
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SmartPantry.Api.Mappings;
 using SmartPantry.Api.Repositories;
 using SmartPantry.Api.Repositories.Interfaces;
 using SmartPantry.Api.Services;
 using SmartPantry.Api.Services.Interfaces;
-using SmartPantry.Api.Data;
 using SmartPantry.API.Data;
 using SmartPantry.API.Repositories;
 using SmartPantry.API.Services;
+using SmartPantry.Services;
+using SmartPantry.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +32,6 @@ builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ISmartShoppingRepository, SmartShoppingRepository>();
 
-
 // Register Services
 builder.Services.AddScoped<IAnalyticsService, AnalyticsService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -36,11 +40,52 @@ builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IGroceryService, GroceryService>();
 builder.Services.AddScoped<ISmartShoppingService, SmartShoppingService>();
 
+// ⭐ ADD JWT Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+// ⭐ Add Swagger with JWT Auth Support
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Enter JWT token like: Bearer {token}",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 // Add controllers
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -53,6 +98,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// ⭐ Use Authentication before Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace SmartPantry.Models
 {
     public class Notification
