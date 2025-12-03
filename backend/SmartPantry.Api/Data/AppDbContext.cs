@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartPantry.Api.Models;
+using SmartPantry.Models;
 
 namespace SmartPantry.API.Data
 {
@@ -18,5 +18,6 @@ namespace SmartPantry.API.Data
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<EcoPoints> EcoPoints { get; set; }
         public DbSet<SmartShoppingSuggestion> SmartShoppingSuggestions { get; set; }
+
     }
 }
