@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using SmartPantry.Api.Repositories.Interfaces;
-using SmartPantry.Api.Services.Interfaces;
-using SmartPantry.DTOs.Grocery;
+using SmartPantry.Api.DTOs.Grocery;
 using SmartPantry.Models;
 using SmartPantry.Repositories.Interfaces;
 using SmartPantry.Services.Interfaces;
@@ -25,7 +23,7 @@ namespace SmartPantry.Services
             {
                 Name = dto.Name,
                 Category = dto.Category,
-                Quantity = dto.Quantity,
+                Quantity = (int)dto.Quantity,
                 Unit = dto.Unit,
                 ExpiryDate = dto.ExpiryDate,
                 UserId = userId
@@ -43,7 +41,7 @@ namespace SmartPantry.Services
                 throw new Exception("Item not found");
 
             existing.Name = dto.Name;
-            existing.Quantity = dto.Quantity;
+            existing.Quantity = (int)dto.Quantity;
             existing.Unit = dto.Unit;
             existing.ExpiryDate = dto.ExpiryDate;
 

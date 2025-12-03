@@ -18,5 +18,6 @@ namespace SmartPantry.Models
         // FK
         public int UserId { get; set; }
         public User User { get; set; }
+        public string Unit { get; internal set; }
     }
 }

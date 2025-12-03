@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SmartPantry.Api.DTOs.Grocery;
-using SmartPantry.Api.Models;
+using SmartPantry.Models;
 
 
 namespace SmartPantry.Profiles

@@ -1,4 +1,4 @@
-﻿using SmartPantry.DTOs.Grocery;
+﻿using SmartPantry.Api.DTOs.Grocery;
 
 namespace SmartPantry.Services.Interfaces
 {

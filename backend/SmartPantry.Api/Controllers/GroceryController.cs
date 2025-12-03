@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SmartPantry.Api.Services.Interfaces;
-using SmartPantry.DTOs.Grocery;
+using SmartPantry.Api.DTOs.Grocery;
 using SmartPantry.Services.Interfaces;
 
 namespace SmartPantry.Controllers
