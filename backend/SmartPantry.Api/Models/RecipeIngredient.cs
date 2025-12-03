@@ -1,4 +1,6 @@
-﻿namespace SmartPantry.Models
+﻿
+
+namespace SmartPantry.Models
 {
     public class RecipeIngredient
     {
